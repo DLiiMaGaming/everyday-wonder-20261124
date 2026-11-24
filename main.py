@@ -18,6 +18,15 @@ ENTRY = (
 
 
 def main() -> None:
+    # Self-check against the competition gate before writing anything:
+    # the entry must be exactly one sentence, 1-200 characters, with no
+    # trailing newline. Scene/twist: a stranger humming in the lift turns
+    # three floors of silence into a shared memory — it is the building,
+    # not the people, that forgets they are strangers.
+    assert 1 <= len(ENTRY) <= 200, "entry must be 1-200 characters"
+    assert "\n" not in ENTRY, "entry must be a single line"
+    assert ENTRY.endswith("."), "entry must be one sentence ending in a period"
+    assert ENTRY == ENTRY.strip(), "entry must not have leading/trailing whitespace"
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
         f.write(ENTRY)
